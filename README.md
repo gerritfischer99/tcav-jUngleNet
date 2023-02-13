@@ -4,6 +4,9 @@ The goal of this project is to detect whether the CNN has learned different conc
 
 This project was part of the Explainable Machine Learning seminar by Ribana Roscher, University of Bonn.
 
+# TCAV
+* TODO
+
 # Requirements
 In order to be able to use jUngleNet, the tlib library has to be installed according to the installation instructions available [here](https://gitlab.jsc.fz-juelich.de/kiste/asos). If the application uses multispectral concepts with 10 bands, the pretrained model weights linked in the repository can be downloaded and used. Otherwise, the model might have to be retrained using less channels. We used a model trained on RGB data that we received from Timo Stomberg.
 
