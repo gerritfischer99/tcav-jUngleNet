@@ -26,6 +26,9 @@ In case of smaller images like those from the Eurosat dataset, which have a size
   <img src="./readme/mirrored.png" width="300" />
   <img src="./readme/stitched.png" width="304" /> 
 </p>
+<p float="left">
+  <em>Fig. 1: Solutions to Eurosat image patch issues</em>
+</p>
 Instead, we looked at two different solutions to handling this issue. The first solution (left) is simply mirroring the image patch along its borders. This yields some unrealistic patterns as the Eurosat image patch is so small that it is reproduced multiple times. 
 
 In our eyes, stitching 16 Eurosat image patches together is the better solution here (right), as it retains realistic shapes and proportions.
@@ -33,19 +36,115 @@ In our eyes, stitching 16 Eurosat image patches together is the better solution 
 # Experiments
 ## Describable Textures Dataset (DTD)
 The Describable Textures Dataset provides images for several concepts. The dataset contains images of different textures. An example is the chequered dataset. Our idea here is to detect, whether the netowrk learned that e.g. anthropogenic areas contain certain structures. On the other side we would like to see whether our assumption that wilderness areas do not contain many structures holds true.
-
-Figure??? shows the TCAV scores for all layers for the class anthropogenic and Figure???  for the class wilderness for the concept chequered. It can be seen that the TCAV scores are very similar. The same holds true for other concepts of the Describable Textures Dataset. For a two-class classification, one would expect that concepts that are sensitive to one class would not show the same sensitivity to the other class. The concepts of the Describable Textures Dataset do not seem to be suitable for finding concepts in the jUngle Net. This could be due to the fact that the kind of images is very different. The jUngle Net was trained with Sentinel-2 satellite images which all have the same spatial resolution of 10 m, while that of the Describable Textures Dataset are regular photos of objects.
+<p float="left">
+  <img src="./readme/anthro/chequered/encoder.png" width="300" />
+  <img src="./readme/anthro/chequered/decoder.png" width="300" />
+  <img src="./readme/anthro/chequered/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 2: TCAV scores of chequered concept for anthropogenic class</em>
+</p>
+Figure 2 shows the TCAV scores for all layers for the class anthropogenic and Figure 3  for the class wilderness for the concept chequered. It can be seen that the TCAV scores are very similar. The same holds true for other concepts of the Describable Textures Dataset. For a two-class classification, one would expect that concepts that are sensitive to one class would not show the same sensitivity to the other class. The concepts of the Describable Textures Dataset do not seem to be suitable for finding concepts in the jUngle Net. This could be due to the fact that the kind of images is very different. The jUngle Net was trained with Sentinel-2 satellite images which all have the same spatial resolution of 10 m, while that of the Describable Textures Dataset are regular photos of objects.
+<p float="left">
+  <img src="./readme/wdpa/chequered/encoder.png" width="300" />
+  <img src="./readme/wdpa/chequered/decoder.png" width="300" />
+  <img src="./readme/wdpa/chequered/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 3: TCAV scores of chequered concept for wilderness class</em>
+</p>
 
 ## Eurosat Dataset
 We test multiple concepts from the Eurosat Dataset. Only the classes SeaLake, River and Highway did not yield any interpretable results. This is porbably due to the fact, that these classes also yield unrealistic shapes when stitched together.
 ### Crop-like concepts
-The EuroSat dataset, unlike the Describable Textures dataset, provides labeled Sentinel 2 satellite images. With this data higher level concepts can be tested. As one concept, crop-like classes can be investigated. EuroSat provides three different crop classes, AnnualCrop, PermanentCrop and Pasture. All three classes are anthropogenic and not wilderness areas. For each class, TCAV scores are calculated on each layer to test sensitivity to antropogenic. The results are shown in Figure ???. Except for some minor differences, the TCAV scores are very similar. The TCAV scores are very high on most layers, indicating a sensitivity of the class antropogenic to crop like concepts. When taking a look at the TCAV scores in the encoder and decoder part of the U-net, it is remarkable that a systematic can be recognized in all three crop classes. In the encoder part, the TCAV score increases with each layer and in the decoder part it decreases with each layer. In other words, the smaller the output, the higher the TCAV score.
+The EuroSat dataset, unlike the Describable Textures dataset, provides labeled Sentinel 2 satellite images. With this data higher level concepts can be tested. As one concept, crop-like classes can be investigated. EuroSat provides three different crop classes, AnnualCrop, PermanentCrop and Pasture. All three classes are anthropogenic and not wilderness areas. For each class, TCAV scores are calculated on each layer to test sensitivity to antropogenic.
+<p float="left">
+  <img src="./readme/anthro/AnnualCrop/encoder.png" width="300" />
+  <img src="./readme/anthro/PermanentCrop/encoder.png" width="300" />
+  <img src="./readme/anthro/Pasture/encoder.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 4: Encoder block TCAV scores of crop-like concepts for anthropogenic class: AnnualCrop (left), PermanentCrop (center), Pasture (right)</em>
+</p>
+
+<p float="left">
+  <img src="./readme/anthro/AnnualCrop/decoder.png" width="300" />
+  <img src="./readme/anthro/PermanentCrop/decoder.png" width="300" />
+  <img src="./readme/anthro/Pasture/decoder.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 5: Decoder block TCAV scores of crop-like concepts for anthropogenic class: AnnualCrop (left), PermanentCrop (center), Pasture (right)</em>
+</p>
+
+<p float="left">
+  <img src="./readme/anthro/AnnualCrop/classifier.png" width="300" />
+  <img src="./readme/anthro/PermanentCrop/classifier.png" width="300" />
+  <img src="./readme/anthro/Pasture/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 6: Classifier block TCAV scores of crop-like concepts for anthropogenic class: AnnualCrop (left), PermanentCrop (center), Pasture (right)</em>
+</p>
+The results are shown in Figures 4-6. Except for some minor differences, the TCAV scores are very similar. The TCAV scores are very high on most layers, indicating a sensitivity of the class antropogenic to crop like concepts. When taking a look at the TCAV scores in the encoder and decoder part of the U-net, it is remarkable that a systematic can be recognized in all three crop classes. In the encoder part, the TCAV score increases with each layer and in the decoder part it decreases with each layer. In other words, the smaller the output, the higher the TCAV score.
+
 ### City-like concepts
 anthropogenic + residential, wilderness
+<p float="left">
+  <img src="./readme/anthro/Residential/encoder.png" width="300" />
+  <img src="./readme/anthro/Residential/decoder.png" width="300" />
+  <img src="./readme/anthro/Residential/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 7: TCAV scores of residential concept for anthropogenic class</em>
+</p>
+
+<p float="left">
+  <img src="./readme/anthro/Industrial/encoder.png" width="300" />
+  <img src="./readme/anthro/Industrial/decoder.png" width="300" />
+  <img src="./readme/anthro/Industrial/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 8: TCAV scores of industrial concept for anthropogenic class</em>
+</p>
+
+<p float="left">
+  <img src="./readme/wdpa/Residential/encoder.png" width="300" />
+  <img src="./readme/wdpa/Residential/decoder.png" width="300" />
+  <img src="./readme/wdpa/Residential/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 9: TCAV scores of residential concept for wilderness class</em>
+</p>
+
 ### Forest
 , anthropogenic + wilderness
+<p float="left">
+  <img src="./readme/anthro/Forest/encoder.png" width="300" />
+  <img src="./readme/anthro/Forest/decoder.png" width="300" />
+  <img src="./readme/anthro/Forest/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 10: TCAV scores of forest concept for anthropogenic class</em>
+</p>
+
+<p float="left">
+  <img src="./readme/wdpa/Forest/encoder.png" width="300" />
+  <img src="./readme/wdpa/Forest/decoder.png" width="300" />
+  <img src="./readme/wdpa/Forest/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 11: TCAV scores of forest concept for wilderness class</em>
+</p>
+
 ### Herbaceous vegetation
 , wilderness
+<p float="left">
+  <img src="./readme/wdpa/HerbaceousVegetation/encoder.png" width="300" />
+  <img src="./readme/wdpa/HerbaceousVegetation/decoder.png" width="300" />
+  <img src="./readme/wdpa/HerbaceousVegetation/classifier.png" width="300" />
+</p>
+<p float="left">
+  <em>Fig. 12: TCAV scores of herbaceous vegetation concept for wilderness class</em>
+</p>
 
 # Summary
 * TODO
