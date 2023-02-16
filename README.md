@@ -17,7 +17,17 @@ A TCAV implementation for PyTorch is available in the [Captum](https://github.co
 To make the random datasets required for TCAV we found the `download_and_make_datasets.py` code from the tensorflow implementation of TCAV helpful, available [here](https://github.com/tensorflow/tcav/tree/master/tcav/tcav_examples/image_models/imagenet).
 
 # Data
-* TODO
+We want to test two very different kinds of concepts. This contains more general concepts that are represented by textures like "chequered" or "grooved" from the [Describable Textures Dataset (DTD)](https://www.robots.ox.ac.uk/~vgg/data/dtd/) as well as some more specific concepts, namely land cover classes from the [Eurosat](https://github.com/phelber/EuroSAT#) dataset.
+
+The fact that the jUngleNet model contains a linear layer has some implications for the shape of the concept image data. The model is usually trained for Sentinel-2 image patches of size 256 px x 256 px. This means that concept images have to be large enough to be cropped to this size. In case of the DTD images this is possible.
+In case of smaller images like those from the Eurosat dataset, which have a size of 64 px x 64 px, other adaptations have to be made. Simply upscaling the image is probably not the best solution because the net only saw images with a spatial resolution of 10 m x 10 m during training.
+<p float="left">
+  <img src="./readme/mirrored.png" width="300" />
+  <img src="./readme/stitched.png" width="304" /> 
+</p>
+Instead, we looked at two different solutions to handling this issue. The first solution (left) is simply mirroring the image patch along its borders. This yields some unrealistic patterns as the Eurosat image patch is so small that it is reproduced multiple times. 
+
+In our eyes, stitching 16 Eurosat image patches together is the better solution here (right), as it retains realistic shapes and proportions.
 
 # Experiments
 * The Describable Textures Dataset provides images for several concepts. The dataset mainly contains images of objects with certain textures. An example is the chequered dataset. Figure??? shows the TCAV scores for all layers for the class anthropogenic and Figure???  for the class wilderness for the concept chequered. It can be seen that the TCAV scores are very similar. The same holds true for other concepts of the Describable Textures Dataset. For a two-class classification, one would expect that concepts that are sensitive to one class would not show the same sensitivity to the other class. The concepts of the Describable Textures Dataset do not seem to be suitable for finding concepts in the jUngle Net. This could be due to the fact that the kind of images is very different. The jUngle Net was trained with Sentinal 2 satellite images, while that of the Describable Textures Dataset are regular photos of objects.
