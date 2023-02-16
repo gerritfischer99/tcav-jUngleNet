@@ -37,9 +37,9 @@ In our eyes, stitching 16 Eurosat image patches together is the better solution 
 ## Describable Textures Dataset (DTD)
 The Describable Textures Dataset provides images for several concepts. The dataset contains images of different textures. An example is the chequered dataset. Our idea here is to detect, whether the netowrk learned that e.g. anthropogenic areas contain certain structures. On the other side we would like to see whether our assumption that wilderness areas do not contain many structures holds true.
 <p float="left">
-  <img src="./readme/anthro/chequered/encoder.png" width="300" />
-  <img src="./readme/anthro/chequered/decoder.png" width="300" />
-  <img src="./readme/anthro/chequered/classifier.png" width="300" />
+  <img src="./readme/anthro/chequered/encoder.png" width="200" />
+  <img src="./readme/anthro/chequered/decoder.png" width="200" />
+  <img src="./readme/anthro/chequered/classifier.png" width="200" />
 </p>
 <p float="left">
   <em>Fig. 2: TCAV scores of chequered concept for anthropogenic class</em>
