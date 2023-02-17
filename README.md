@@ -2,7 +2,7 @@
 TCAV can be used to test the sensitivity of model predictions against different concepts. The method is introduced by Been Kim et al. in their paper ["Interpretability Beyond Feature Attribution: Quantitative Testing with Concept Activation Vectors (TCAV)"](https://arxiv.org/abs/1711.11279). We want to apply this method to a remote sensing application. This project focusses on jUngle-Net, a convolutional neural network designed to distinguish anthropogenic areas from wilderness. It consists of a U-Net at the beginning, followed by a small classificator block. jUngle-Net is developed by Timo Stomberg et al. and introduced in their paper ["Exploring Wilderness Characteristics Using Explainable Machine Learning in Satellite Imagery"](https://arxiv.org/abs/2203.00379). The code for this paper is available [here](https://gitlab.jsc.fz-juelich.de/kiste/asos). 
 The goal of this project is to detect whether the CNN has learned different concepts and to quantify how much they contribute to the decision making process.
 
-This project was part of the Explainable Machine Learning seminar by Prof. Ribana Roscher, University of Bonn.
+This project was part of the Explainable Machine Learning seminar by Prof. Ribana Roscher, University of Bonn. Parts of this code were adapted from the Captum TCAV tutorial available [here](https://captum.ai/tutorials/TCAV_Image).
 
 # Requirements
 In order to be able to use jUngle-Net, the tlib library has to be installed according to the installation instructions available [here](https://gitlab.jsc.fz-juelich.de/kiste/asos). If the application uses multispectral concepts with 10 bands, the pretrained model weights linked in the repository can be downloaded and used. Otherwise, the model might have to be retrained using less channels. In our experiments we used a model trained on RGB data.
@@ -167,12 +167,11 @@ Finally, we test a concept that we assume to belong to the wilderness class. Thi
 </p>
 
 # Summary
-* TODO
+Unfortunately computing TCAV scores for jUngle-Net with the Describable Textures Dataset is unsuccessful. The Eurosat dataset yields better results. For most concepts the expectations can be met. We can see a systematic when inspecting the different layers. All concepts get higher scores towards the middle of the U-Net. This could be due to the fact that these concepts play more of a role in these central layers or to TCAV working better with smaller layer outputs.
 
 # References
-* DTD
-* Eurosat
-* jungleNet
-* TCAV
-* Tensorflow
-* Captum TCAV tutorial
+* M. Cimpoi, S. Maji, I. Kokkinos, S. Mohamed, A. Vedaldi (2014): Describing Textures in the Wild. Proceedings of the IEEE Conf. on Computer Vision and Pattern Recognition.
+* P. Helber, B. Bischke, A. Dengel, D. Borth (2019): Eurosat: A novel dataset and deep learning benchmark for land use and land cover classification. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing.
+* P. Helber, B. Bischke, A. Dengel (2018): Introducing EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification. 2018 IEEE International Geoscience and Remote Sensing Symposium.
+* T. Stomberg, T. Stone, J. Leonhardt, R. Roscher (2022): Exploring Wilderness Using Explainable Machine Learning in Satellite Imagery.
+* B. Kim, M. Wattenberg, J. Gilmer, C. Cai, J. Wexler, F. Viegas (2018): Interpretability beyond feature attribution: Quantitative testing with concept activation vectors (tcav). In International conference on machine learning (pp. 2668-2677). PMLR.
