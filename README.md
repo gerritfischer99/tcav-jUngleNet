@@ -167,7 +167,7 @@ Finally, we test a concept that we assume to belong to the wilderness class. Thi
 </p>
 
 # Summary
-Unfortunately computing TCAV scores for jUngle-Net with the Describable Textures Dataset is unsuccessful. The Eurosat dataset yields better results. For most concepts the expectations can be met. We can see a systematic when inspecting the different layers. All concepts get higher scores towards the middle of the U-Net. This could be due to the fact that these concepts play more of a role in these central layers or to TCAV working better with smaller layer outputs.
+Unfortunately computing TCAV scores for jUngle-Net with the Describable Textures Dataset is unsuccessful. The input data is too different from the concepts. The Eurosat dataset yields better results. For most concepts the expectations can be met. We can see a systematic when inspecting the different layers. All concepts get higher scores towards the middle of the U-Net. This could be due to the fact that these concepts play more of a role in these central layers or to TCAV working better with smaller layer outputs.
 
 # References
 * M. Cimpoi, S. Maji, I. Kokkinos, S. Mohamed, A. Vedaldi (2014): Describing Textures in the Wild. Proceedings of the IEEE Conf. on Computer Vision and Pattern Recognition.
